@@ -5,12 +5,15 @@ import MobileNavbar from "../../MobileNavbar";
 import DeleteModal from "../../DeleteModal";
 import { useQuery} from '@tanstack/react-query';
 import EditRoom from "../../EditRoom";
+import AddRoom from "../../AddRoom";
 
 function AdminRooms(){
 
        const [opendelete, setOpenDelete] = useState(false);
        const [roomToDelete, setRoomToDelete] = useState(null);
        const [openEdit, setOpenEdit] = useState(false);
+         const [openAdd, setOpenAdd] = useState(false);
+
        const [selectedRoom, setSelectedRoom] = useState(null);
     
    // const [loading, setLoading] = useState(true);
@@ -43,7 +46,7 @@ const availableRooms = Rooms.filter(room => room.status === "Available").length;
 const maintenanceRooms = Rooms.filter(room => room.status === "Maintenance").length;
 
        return(
-        <div className="overflow-scroll">
+        <div className="overflow-scroll Geist-font">
             <MobileNavbar/>
              <div className="flex flex-col pt-10 md:flex-row gap-4 md:gap-10">
                 <DashboardCard header={"Total Rooms"} content={Rooms.length} color={"bg-amber-950"}/>
@@ -53,13 +56,16 @@ const maintenanceRooms = Rooms.filter(room => room.status === "Maintenance").len
                 </div>
                      <div className="mt-8 mx-10">
                 <div className="flex justify-end">
-                    <button className="py-2 px-3 bg-blue-200">Add Faciltiy</button>
+                    <button className="py-2 px-3 bg-blue-200" onClick={() => setOpenAdd(true)}>
+                        Add Facility
+                    </button>
                 </div>
-                <div>
+                <div className="bg-white">
                     <table className=" divide-y min-w-full text-sm md:text-md  divide-gray-200">
                         <thead>
                         <tr>
                             <th className="px-6 py-3 text-left  font-medium">Name</th>
+                            <th className="px-6 py-3 text-left  font-medium">Price</th>
                             <th className="px-6 py-3 text-left  font-medium ">Category</th>
                             <th className="px-6 py-3 text-left  font-medium ">Status</th>
                             <th className="px-6 py-3 text-left  font-medium ">Action</th>
@@ -103,6 +109,11 @@ const maintenanceRooms = Rooms.filter(room => room.status === "Maintenance").len
             </div>
             <DeleteModal open={opendelete} onClose={() => { setOpenDelete(false); setRoomToDelete(null); }} roomId={roomToDelete}/>
             <EditRoom open={openEdit} room={selectedRoom} onClose={() => { setOpenEdit(false); setSelectedRoom(null); }} /> 
+                <AddRoom 
+  open={openAdd} 
+  onClose={() => setOpenAdd(false)} 
+/>
+
         </div>
        )
 }

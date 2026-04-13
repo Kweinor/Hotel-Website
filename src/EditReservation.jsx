@@ -60,7 +60,7 @@ function EditItem({ reservation, open, onClose }) {
           size={20}
         />
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="gap-">
             <label>Guest Name:</label>
             <input
               className="border rounded-md py-2 px-3"

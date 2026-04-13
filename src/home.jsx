@@ -40,10 +40,10 @@ const { data: Rooms = [], isLoading, error } = useQuery({
             <NavBar/>
             </div>
             <div>
-            <div className="flex flex-col md:flex-row justify-center md:justify-between gap-30 px-10  md:px-30">
-               <div className="mt-40">
+            <div className="flex flex-col md:flex-row justify-center md:justify-between gap-20 lg:px-30">
+               <div className="pt-40 bg-[url('HotelHome.jpg')] lg:bg-none bg-cover md:pt-20 bg-center h-screen w-full flex flex-col justify-center md:items-start items-center text-brown-300 text-center ">
                 <span className="flex justify-center text-center">Paradise View</span>
-                <h1 className="text-2xl md:text-7xl w-80 md:w-120 fl items-center">Hotel for every moment rich in emotion</h1>
+                <h1 className="text-2xl md:text-7xl w-80 md:w-120 fl items-center md:text-left">Hotel for every moment rich in emotion</h1>
                 <p>Every moment feels like the first time in paradise view</p>
                 <div className=" flex gap-12 mt-8">
                     <button className="py-3 px-5 bg-gray-700 rounded-3xl text-amber-50" type="button">Book now</button>
@@ -52,7 +52,7 @@ const { data: Rooms = [], isLoading, error } = useQuery({
                </div>
                <div>
                 <figure>
-                    <img className="h-156 w-140 hidden md:block shadow-2xl  mt-30" src="hero.jpeg" alt="outsideView" />
+                    <img className="h-156 w-800 hidden lg:block shadow-2xl  mt-30" src="IMG_3928.jpg" alt="outsideView" />
                 </figure>
                </div>
             </div>
@@ -64,13 +64,13 @@ const { data: Rooms = [], isLoading, error } = useQuery({
        
       <Facilities />
       
-      <div className="bg-[#F5F5F4] flex flex-col items-center text-white p-6 bg-cover h-120">
+      <div className="bg-[#F5F5F4] flex flex-col items-center text-white py-16 px-10bg-cover ">
           
              <div className="z-50  text-white">
             <h1 className="flex sans-font items-center gap-4 justify-center text-[#8c744f]"><hr className="w-6"/>Luxurious Rooms <hr className="w-6"/></h1>
-            <p className="text-3xl serif-font text-[#081628]">All room are design for your comfort</p>
+            <p className="text-3xl serif-font px-8 text-[#081628]">All room are design for your comfort</p>
             </div>
-            <div className="flex gap-15 mt-8">
+            <div className="flex flex-col md:flex-row gap-15 mt-8">
               
              {isLoading ? (
     <p>Loading rooms...</p>

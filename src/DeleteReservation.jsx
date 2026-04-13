@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-function DeleteModal({ open, onClose, roomId }) {
+function DeleteReservation({ open, onClose, reservationId }) {
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
 
 
-    mutationFn: async (roomId) => {
-      const res = await fetch(`http://localhost:3000/api/v1/rooms/${roomId}`, {
+    mutationFn: async (reservationId) => {
+      const res = await fetch(`http://localhost:3000/api/v1/reservations/${reservationId}`, {
         method: 'DELETE',
       });
       const responseText = await res.text();
       console.log('Response body:', responseText);
 
       if (!res.ok) {
-        throw new Error(`Failed to delete room: ${responseText}`);
+        throw new Error(`Failed to delete reservation: ${responseText}`);
       }
       // Handle 204 No Content or empty response
       if (res.status === 204 || !responseText.trim()) {
@@ -23,7 +23,7 @@ function DeleteModal({ open, onClose, roomId }) {
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries(["Rooms"]); // 🔥 refetch updated list
+      queryClient.invalidateQueries(["Reservations"]); // 🔥 refetch updated list
       onClose();
     }
   });
@@ -43,7 +43,7 @@ if (!open) return null;
               Cancel
             </button>
            <button
-  onClick={() => deleteMutation.mutate(roomId)}
+  onClick={() => deleteMutation.mutate(reservationId)}
   disabled={deleteMutation.isLoading}
   className={`px-4 py-2 rounded text-white ${deleteMutation.isLoading ? "bg-red-300" : "bg-red-500"}`}
 >
@@ -58,4 +58,5 @@ if (!open) return null;
   );
 }
 
-export default DeleteModal;
+
+export default DeleteReservation;

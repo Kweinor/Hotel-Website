@@ -23,7 +23,9 @@ function EditRoom({room, open}) {
     }
     return JSON.parse(responseText);
   }})
-    const [name, setName] = useState(room?.name ?? "");
+
+  
+  const [name, setName] = useState(room?.name ?? "");
   const [price, setPrice] = useState(room?.price ?? "");
   const [capacity, setCapacity] = useState(room?.capacity ?? "");
   const [description, setDescription] = useState(room?.description ?? "");

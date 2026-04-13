@@ -11,9 +11,9 @@ function About(){
             <NavBar/>
             </div>
            <div className="relative">
-            <div className="z-50  flex flex-col justify-center items-center h-screen relative ">
+            <div className="z-1  flex flex-col justify-center items-center h-screen relative ">
                 <h1 className="text-6xl text-white">About us</h1>
-                <span className="text-1xl w-120 text-center text-white">The elegant luxury bedrooms in this gallery showcase custom interior 
+                <span className="text-1xl w-90 md:w-120 text-center text-white">The elegant luxury bedrooms in this gallery showcase custom interior 
                        designs & decorating ideas. View pictures and find your
                         perfect luxury bedroom design.</span>
             </div>

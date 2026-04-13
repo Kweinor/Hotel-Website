@@ -18,6 +18,11 @@ import Dashboard from './pages/AdminPanel/dashboard.jsx'
 import AdminRooms from './pages/AdminPanel/adminRooms.jsx'
 import AdminReservation from './pages/AdminPanel/adminReservation.jsx'
 import Guest from './Guest.jsx'
+import HotelAuthLogin from './HotelAuthLogin.jsx';
+import AdminLogin from './Authentication/AdminLogins.jsx';
+import AuthLayout from './Authentication/AuthLayout.jsx';
+import StaffLogin from './Authentication/StaffLogins.jsx';
+import { Navigate } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -37,12 +42,23 @@ function App() {
       <Route path='/bookings' element={<Bookings/>}/>
       <Route path='/rooms/:id' element={<Room/>}/>
       <Route path='/about' element={<About/>}/>
+      <Route path='/signin' element={<HotelAuthLogin/>}/>
+
+
        <Route path='/admin' element={<AdminPanel/>}>
        <Route index  element={<Dashboard/>}/>
        <Route path='/admin/guests' element={<Guest/>}/>
        <Route path='/admin/rooms' element={<AdminRooms/>}/>
        <Route path='/admin/reservations' element={<AdminReservation/>}/>
+        </Route>
+
+
+       <Route path="/login" element={<AuthLayout />}>
+       <Route index element={<Navigate to="admin" replace />} />
+       <Route path="admin" element={<AdminLogin />} />
+       <Route path="staff" element={<StaffLogin />} />
        </Route>
+      
     </Routes>
     </BrowserRouter>
     </QueryClientProvider>

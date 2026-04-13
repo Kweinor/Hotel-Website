@@ -4,10 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import DashboardCard from "../../DashhboardCard";
 import EditItem from "../../EditReservation";
 import { useState } from "react";
+import DeleteReservation from "../../DeleteReservation";
 
 function AdminReservation() {
   const [openEdit, setOpenEdit] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [opendelete, setOpenDelete] = useState(false);
+  const [reservationToDelete, setReservationToDelete] = useState(null);
 
     
 const {data: reservations = [], isLoading, error} = useQuery({
@@ -20,6 +23,16 @@ const {data: reservations = [], isLoading, error} = useQuery({
    }
 })
 
+   
+ const {data: Rooms = []} = useQuery({
+     queryKey:["Rooms"],
+     queryFn: async()=>{
+        const res = await fetch("http://localhost:3000/api/v1/rooms");
+        if (!res.ok) throw new Error("Failed to fetch");
+        const result = await res.json();
+        return result.data.Rooms;
+     }
+ })
  {/*
  useEffect(() => {
         fetch("http://localhost:3000/api/v1/reservations")
@@ -62,8 +75,43 @@ const {data: reservations = [], isLoading, error} = useQuery({
     (r) => getAutomatedStatus(r) === "cancelled"
   ).length;
 
+function formatCreatedAt(createdAt) {
+  if (!createdAt) return "N/A";
+
+  const createdDate = new Date(createdAt);
+  const today = new Date();
+
+  const isToday =
+    createdDate.getDate() === today.getDate() &&
+    createdDate.getMonth() === today.getMonth() &&
+    createdDate.getFullYear() === today.getFullYear();
+
+  return isToday
+    ? createdDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    : createdDate.toLocaleDateString();
+}
+
+function getRoomPrice(roomName) {
+  const room = Rooms.find(r => r.name === roomName || r._id === roomName);
+  return room ? room.price : 0;
+}
+
+function calculateAmount(reservation) {
+  const checkIn = new Date(reservation.checkIn);
+  const checkOut = new Date(reservation.checkOut);
+  const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+  const pricePerNight = getRoomPrice(reservation.room);
+  const daysStay = nights > 0 ? nights : 1; // Ensure at least 1 day charge
+  return daysStay * pricePerNight;
+}
+
+
+
+
+
+
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center Geist-font">
       <h1>Admin Reservation Page</h1>
       <div className="flex flex-col pt-10 md:flex-row gap-4 md:gap-10">
                 <DashboardCard header={"TOTAL RESERVATIONS"} content={totalReservations} color={"bg-amber-950"}/>
@@ -72,10 +120,11 @@ const {data: reservations = [], isLoading, error} = useQuery({
                 <DashboardCard header={"TOTAL CANCELLATIONS"} content={totalCancellations} color={"bg-purple-300"}/>
                 </div>
       <div className="mt-5">
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto bg-white">
                     <table className="text-sm md:text-md divide-y min-w-[1000px]  divide-gray-200">
                         <thead>
                         <tr>
+                            <th className="px-6 py-3 text-left  font-medium">Date</th>
                             <th className="px-6 py-3 text-left  font-medium">Name</th>
                             <th className="px-6 py-3 text-left  font-medium ">Room</th>
                             <th className="px-6 py-3 text-left  font-medium ">Price </th>
@@ -97,15 +146,17 @@ const {data: reservations = [], isLoading, error} = useQuery({
   ) : (
     reservations.map((reservation) => (
       <tr key={reservation._id} className="px-6 py-3 text-left font-medium text-gray-500">
+
+        <td className="px-6 py-4">{formatCreatedAt(reservation.createdAt)}</td>
         <td className="px-6 py-4">{reservation.guestName}</td>
         <td className="px-6 py-4">{reservation.room}</td>
-        <td className="px-6 py-4">{reservation.price}</td>
+       { <td className="px-6 py-4">{`$${calculateAmount(reservation).toFixed(2)}`}</td>}
         <td className="px-6 py-4">{reservation.checkIn.split("T")[0]}</td>
         <td className="px-6 py-4">{reservation.checkOut.split("T")[0]}</td>
         <td className="px-6 py-4">{reservation.status}</td>
         <td className="flex gap-4 items-center px-6 py-4">
            <button onClick={() => {setSelectedRoom(reservation); setOpenEdit(true)}}>  <Pencil size={18} color="blue" /></button>
-                                <button > <Trash size={18} color="red" /> </button>
+                                <button onClick={() => { setReservationToDelete(reservation._id); setOpenDelete(true); } } > <Trash size={18} color="red" /> </button>
 
         </td>
       </tr>
@@ -117,6 +168,8 @@ const {data: reservations = [], isLoading, error} = useQuery({
                     </div>
                 </div>
                 <EditItem open={openEdit} setOpen={setOpenEdit} reservation={selectedRoom}/>
+              <DeleteReservation open={opendelete} onClose={() => { setOpenDelete(false); setReservationToDelete(null); }} reservationId={reservationToDelete}/>
+
     </div>
   );
 }

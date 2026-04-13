@@ -17,7 +17,7 @@ function Facilities(){
 
        return (
            <div className=" bg-gray-50 flex mt-14 py-10 items-center flex-col justify-center">
-                <h1 className="flex sans-font items-center gap-4 justify-center text-[#8c744f] text-center"><hr className="w-6"/>Our Facilities <hr className="w-6"/></h1>
+                <h1 className="flex sans-font items-center gap-4` justify-center text-[#8c744f] text-center"><hr className="w-6"/>Our Facilities <hr className="w-6"/></h1>
                 <p className="text-center text-3xl serif-font text-[#081628]">We offer modern (5 star) hotel facilities for your comfort.</p>
            <div className="grid grid-cols-2 md:grid-cols-4 justify-center gap-20 p-10"> 
           

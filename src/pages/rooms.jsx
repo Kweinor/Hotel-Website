@@ -39,7 +39,7 @@ function Rooms(){
        
          
             <div className="relative overflow-hidden h-screen w-screen pt-20">
-                <div className="z-50 flex flex-col justify-center items-center h-screen text-white relative">
+                <div className="z-1 flex flex-col justify-center items-center h-screen text-white relative">
                 <h1 className="text-3xl md:text-6xl ">Rooms and Suites</h1>
                 <p className="w-80 md:w-120 text-center">The elegant luxury bedrooms in this gallery showcase custom interior 
                 designs & decorating ideas.</p>
@@ -54,7 +54,7 @@ function Rooms(){
                   <source src={myVideo} type="video/mp4" />
                 </video>
             </div>
-            <div className="flex flex-col md:px-20 lg:px-40 items-center p-10 justify-center bg-orange-50">
+            <div id="rooms" className="flex flex-col md:px-20 lg:px-40 items-center p-10 justify-center bg-orange-50">
               <div className="flex flex-col items-center justify-center ">
                   <h1 className="text-center sans-font flex gap-4 items-center text-[#8c744f]"><hr className="w-12"/>Our Rooms and Suites<hr className="w-12"/></h1>
                   <p className="text-2xl md:text-3xl serif-font ">Spaces Design For Deep Rest </p>

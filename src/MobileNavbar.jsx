@@ -10,7 +10,7 @@ return(
       
     {open && <MobileMenu setOpen={setOpen}/>}
           <div>
-                  <h1 className={`font-bold arvo-font text-xl `}>tk<span >quaynor</span>.</h1>
+                  <h1 className={`font-bold arvo-font text-xl `}><span >KINGSLAND</span></h1>
           </div>
           <div className='flex justify-between items-center gap-3'>
        

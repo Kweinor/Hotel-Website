@@ -17,7 +17,7 @@ useEffect(()=>{
 
     return(
         <div>
-            <div className="flex gap-10">
+            <div className="flex  gap-10">
                 <DashboardCard header={"Total Facility"}/>
                 <DashboardCard header={"Active Facility"}/>
                 <DashboardCard header={"Total Facility"}/>

@@ -1,6 +1,7 @@
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 function BookingModal({ isOpen, onClose, selectedRoom}) {
  const [rooms, setRooms] = useState([])
@@ -38,16 +39,20 @@ useEffect(()=>{
 
     const result = await response.json();
 
-    console.log("Reservation created:", result);
+    if (!response.ok) throw new Error(result.message || "Failed to create reservation"); 
+     toast.success("Reservation done successfully 🎉" + "" + "It will be confirmed shortly");
 
     reset();
     onClose();
   } catch (error) {
     console.error("Error creating reservation:", error);
+
+    // ❌ ERROR TOAST
+    toast.error(error.message || "Something went wrong")
   }
 };
   return (
-    <div className="fixed inset-0 backdrop-blur-sm bg-black/50 flex items-center justify-center z-50">
+    <div className="fixed pt-50 md:pt-0 overflow-y-auto md:overflow-none inset-0 backdrop-blur-sm bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white w-full max-w-4xl rounded-xl shadow-lg p-6">
 
         {/* Header */}
@@ -114,10 +119,10 @@ useEffect(()=>{
             <div>
               <label className="block mb-1 font-medium">Contact</label>
               <input
-                {...register("contact", { required: "Contact is required" })}
+                {...register("phoneNumber", { required: "Contact is required" })}
                 className="w-full border rounded-md px-3 py-2"
               />
-              {errors.contact && <p className="text-red-600 text-sm">{errors.contact.message}</p>}
+              {errors.phoneNumber && <p className="text-red-600 text-sm">{errors.phoneNumber.message}</p>}
             </div>
              <div className="flex justify-between">
             {/* Country */}

@@ -16,7 +16,7 @@ function Header() {
 
 
     return(
-        <div className="flex bg-white w-full top-0 justify-between items-center p-4 ">
+        <div className="flex shadow-md fixed bg-white w-full top-0 justify-between items-center p-4 ">
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <div className="flex items-center gap-4">
                <div>

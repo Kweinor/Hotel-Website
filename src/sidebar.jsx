@@ -4,8 +4,8 @@ function Sidebar(){
     return(
         <div className="h-full sticky hidden md:flex px-8 flex-col gap-10 pt-10 bg-[#1a2744] text-orange-50 w-full ">
          <div className="flex flex-col items-center border-b border-gray-700 pb-10">
-            <h1 className="text-2xl font-bold">ADEHYEMBA</h1>
-            <span className="text-sm text-gray-400">GUEST HOUSE</span>
+            <h1 className="text-2xl font-bold">KINGSLAND</h1>
+            <span className="text-sm text-gray-400">HOTEL</span>
             <p className="text-[9px] text-gray-400">Admin Panel</p>
          </div>
           <div className="flex flex-col gap-6 text-gray-400">

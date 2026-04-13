@@ -11,12 +11,12 @@ function AdminPanel() {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 ml-64 flex flex-col overflow-y-auto bg-indigo-50">
+      <div className="flex-1 ml-64 flex  flex-col overflow-y-auto bg-indigo-50">
         {/* Full-width header at the top */}
         <Header />
 
         {/* Content below header */}
-        <div className="flex-1 justify-center items-centeroverflow-y-auto px-12">
+        <div className="flex-1 justify-center mt-20 items-center overflow-y-auto px-12">
           <Outlet />
         </div>
       </div>

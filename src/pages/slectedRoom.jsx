@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BookingModal from "../bookingModal";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RoomDetails() {
   const { id } = useParams();
@@ -76,6 +78,7 @@ function RoomDetails() {
       />
                 </div>
             </div>
+             <ToastContainer position="top-right" autoClose={10000} />
         </div>
     )
 
